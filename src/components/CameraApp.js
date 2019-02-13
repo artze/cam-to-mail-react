@@ -101,6 +101,7 @@ class CameraApp extends React.Component {
         axios.post('/pdf-mails', formDataToUpload)
             .then(() => {
                 this.setState(() => ({
+                    emailFieldModal: false,
                     emailLoading: false,
                     imgDataUrl: '',
                     emailFeedbackMsg: 'Email was sent successfully.'
@@ -108,6 +109,7 @@ class CameraApp extends React.Component {
             })
             .catch((err) => {
                 this.setState(() => ({
+                    emailFieldModal: false,
                     emailLoading: false,
                     imgDataUrl: '',
                     emailFeedbackMsg: 'Email sending failed.'
