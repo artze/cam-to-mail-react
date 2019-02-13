@@ -3,9 +3,9 @@ import Modal from 'react-modal'
 
 Modal.setAppElement('#app')
 
-const EmailFieldModal = () => (
+const EmailFieldModal = (props) => (
     <Modal
-        isOpen={true}
+        isOpen={props.emailFieldModal}
         className="modal"   
     >
         <div className="modal-content">
@@ -17,7 +17,8 @@ const EmailFieldModal = () => (
             >Email</label>
             <input className="input is-large" type="text" placeholder="Type your email here" />
             <button
-                className="button is-medium is-success"
+                className={`button is-medium is-success ${props.emailLoading && 'is-loading'}`}
+                onClick={props.submitImage}
                 style={{
                     'margin-top': '1em'
                 }}

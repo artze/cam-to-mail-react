@@ -21,10 +21,10 @@ const ImageCaptureModal = (props) => (
                 >
                     Cancel</button>
                 <button
-                    className={`button is-medium is-success action-btn ${props.emailLoading && 'is-loading'}`}
-                    onClick={props.submitImage}
+                    className="button is-medium is-success action-btn"
+                    onClick={props.bringUpEmailFieldModal}
                 >
-                    Send</button>
+                    Next</button>
             </div>
         </div>
     </Modal>

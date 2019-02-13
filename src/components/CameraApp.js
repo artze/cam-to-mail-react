@@ -15,6 +15,7 @@ class CameraApp extends React.Component {
         imgDataUrl: '',
         videoDevicesIdArr: [],
         selectedVideoDeviceIndex: 0,
+        emailFieldModal: false,
         emailLoading: false,
         emailFeedbackMsg: ''
     }
@@ -119,6 +120,10 @@ class CameraApp extends React.Component {
         this.setState(() => ({ emailFeedbackMsg: '' }))
     }
 
+    bringUpEmailFieldModal = () => {
+        this.setState(() => ({ emailFieldModal: true }))
+    }
+
     componentDidMount() {
         this.getVideoDevices()
             .then(() => {
@@ -165,9 +170,12 @@ class CameraApp extends React.Component {
                 <ImageCaptureModal
                     imgDataUrl={this.state.imgDataUrl}
                     removeImage={this.removeImage}
+                    bringUpEmailFieldModal={this.bringUpEmailFieldModal}></ImageCaptureModal>
+                <EmailFieldModal
+                    emailFieldModal={this.state.emailFieldModal}
                     submitImage={this.submitImage}
-                    emailLoading={this.state.emailLoading}></ImageCaptureModal>
-                <EmailFieldModal></EmailFieldModal>
+                    emailLoading={this.state.emailLoading}
+                ></EmailFieldModal>
                 <EmailFeedbackModal
                     emailFeedbackMsg={this.state.emailFeedbackMsg}
                     clearEmailFeedbackMsg={this.clearEmailFeedbackMsg}
