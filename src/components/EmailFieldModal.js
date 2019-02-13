@@ -9,10 +9,17 @@ const EmailFieldModal = () => (
         className="modal"   
     >
         <div className="modal-content">
+            <label
+                className="label is-large"
+                style={{
+                    width: '100%'
+                }}
+            >Email</label>
+            <input className="input is-large" type="text" placeholder="Type your email here" />
             <button
                 className="button is-medium is-success"
                 style={{
-                    width: '20%'
+                    'margin-top': '1em'
                 }}
             >Send</button>
         </div>
