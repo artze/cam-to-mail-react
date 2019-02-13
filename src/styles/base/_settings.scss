@@ -1,0 +1,23 @@
+// Colors
+$background-blue: #209cee;
+$light-grey: #b9b9b9;
+
+// Spacing
+$s-size: 1.2rem;
+$m-size: 1.6rem;
+$l-size: 3.2rem;
+$xl-size: 4.8rem;
+$desktop-breakpoint: 45rem;
+
+// font
+@font-face {
+    font-family: 'Gudea';
+    src: url('fonts/Gudea-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Gudea';
+    src: url('fonts/Gudea-Bold.ttf');
+    font-weight: bold;
+}
