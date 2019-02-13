@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import jsPDF from 'jspdf'
 import ImageCaptureModal from './ImageCaptureModal'
+import EmailFieldModal from './EmailFieldModal'
 import EmailFeedbackModal from './EmailFeedbackModal'
 import switchCamIcon from '../../public/images/switch-camera.png'
 
@@ -166,6 +167,7 @@ class CameraApp extends React.Component {
                     removeImage={this.removeImage}
                     submitImage={this.submitImage}
                     emailLoading={this.state.emailLoading}></ImageCaptureModal>
+                <EmailFieldModal></EmailFieldModal>
                 <EmailFeedbackModal
                     emailFeedbackMsg={this.state.emailFeedbackMsg}
                     clearEmailFeedbackMsg={this.clearEmailFeedbackMsg}
