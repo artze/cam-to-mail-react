@@ -6,7 +6,8 @@ Modal.setAppElement('#app')
 const EmailFieldModal = (props) => (
     <Modal
         isOpen={props.emailFieldModal}
-        className="modal"   
+        className="modal"
+        onRequestClose={props.closeEmailFieldModal}
     >
         <div className="modal-content">
             <label

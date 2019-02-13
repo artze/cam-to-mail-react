@@ -124,6 +124,10 @@ class CameraApp extends React.Component {
         this.setState(() => ({ emailFieldModal: true }))
     }
 
+    closeEmailFieldModal = () => {
+        this.setState(() => ({ emailFieldModal: false }))
+    }
+
     componentDidMount() {
         this.getVideoDevices()
             .then(() => {
@@ -173,6 +177,7 @@ class CameraApp extends React.Component {
                     bringUpEmailFieldModal={this.bringUpEmailFieldModal}></ImageCaptureModal>
                 <EmailFieldModal
                     emailFieldModal={this.state.emailFieldModal}
+                    closeEmailFieldModal={this.closeEmailFieldModal}
                     submitImage={this.submitImage}
                     emailLoading={this.state.emailLoading}
                 ></EmailFieldModal>
