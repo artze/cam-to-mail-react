@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import jsPDF from 'jspdf'
 import ImageCaptureModal from './ImageCaptureModal'
+import EmailFieldModal from './EmailFieldModal'
 import EmailFeedbackModal from './EmailFeedbackModal'
 import switchCamIcon from '../../public/images/switch-camera.png'
 
@@ -14,6 +15,7 @@ class CameraApp extends React.Component {
         imgDataUrl: '',
         videoDevicesIdArr: [],
         selectedVideoDeviceIndex: 0,
+        emailFieldModal: false,
         emailLoading: false,
         emailFeedbackMsg: ''
     }
@@ -83,7 +85,7 @@ class CameraApp extends React.Component {
         this.setState(() => ({ imgDataUrl: '' }))
     }
 
-    submitImage = () => {
+    submitImage = (email) => {
         this.setState(() => ({ emailLoading: true }))
         const imgData = this.canvasElement.toDataURL('image/png')
         
@@ -94,11 +96,12 @@ class CameraApp extends React.Component {
         const form = document.forms.namedItem('imageUploadForm')
         const formDataToUpload = new FormData(form)
         formDataToUpload.append('pdfFile', pdfBlob)
-
+        formDataToUpload.append('email', email)
         
         axios.post('/pdf-mails', formDataToUpload)
             .then(() => {
                 this.setState(() => ({
+                    emailFieldModal: false,
                     emailLoading: false,
                     imgDataUrl: '',
                     emailFeedbackMsg: 'Email was sent successfully.'
@@ -106,6 +109,7 @@ class CameraApp extends React.Component {
             })
             .catch((err) => {
                 this.setState(() => ({
+                    emailFieldModal: false,
                     emailLoading: false,
                     imgDataUrl: '',
                     emailFeedbackMsg: 'Email sending failed.'
@@ -116,6 +120,14 @@ class CameraApp extends React.Component {
 
     clearEmailFeedbackMsg = () => {
         this.setState(() => ({ emailFeedbackMsg: '' }))
+    }
+
+    bringUpEmailFieldModal = () => {
+        this.setState(() => ({ emailFieldModal: true }))
+    }
+
+    closeEmailFieldModal = () => {
+        this.setState(() => ({ emailFieldModal: false }))
     }
 
     componentDidMount() {
@@ -164,8 +176,13 @@ class CameraApp extends React.Component {
                 <ImageCaptureModal
                     imgDataUrl={this.state.imgDataUrl}
                     removeImage={this.removeImage}
+                    bringUpEmailFieldModal={this.bringUpEmailFieldModal}></ImageCaptureModal>
+                <EmailFieldModal
+                    emailFieldModal={this.state.emailFieldModal}
+                    closeEmailFieldModal={this.closeEmailFieldModal}
                     submitImage={this.submitImage}
-                    emailLoading={this.state.emailLoading}></ImageCaptureModal>
+                    emailLoading={this.state.emailLoading}
+                ></EmailFieldModal>
                 <EmailFeedbackModal
                     emailFeedbackMsg={this.state.emailFeedbackMsg}
                     clearEmailFeedbackMsg={this.clearEmailFeedbackMsg}
