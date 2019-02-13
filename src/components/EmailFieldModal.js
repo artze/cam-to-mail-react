@@ -8,7 +8,7 @@ class EmailFieldModal extends React.Component {
 
     handleImageSubmit = () => {
         const emailValue = this.inputElement.value
-        this.props.setEmailValue(emailValue)
+        this.props.submitImage(emailValue)
     }
 
     render() {

@@ -15,7 +15,6 @@ class CameraApp extends React.Component {
         imgDataUrl: '',
         videoDevicesIdArr: [],
         selectedVideoDeviceIndex: 0,
-        email: '',
         emailFieldModal: false,
         emailLoading: false,
         emailFeedbackMsg: ''
@@ -86,7 +85,7 @@ class CameraApp extends React.Component {
         this.setState(() => ({ imgDataUrl: '' }))
     }
 
-    submitImage = () => {
+    submitImage = (email) => {
         this.setState(() => ({ emailLoading: true }))
         const imgData = this.canvasElement.toDataURL('image/png')
         
@@ -97,7 +96,7 @@ class CameraApp extends React.Component {
         const form = document.forms.namedItem('imageUploadForm')
         const formDataToUpload = new FormData(form)
         formDataToUpload.append('pdfFile', pdfBlob)
-
+        formDataToUpload.append('email', email)
         
         axios.post('/pdf-mails', formDataToUpload)
             .then(() => {
@@ -127,10 +126,6 @@ class CameraApp extends React.Component {
 
     closeEmailFieldModal = () => {
         this.setState(() => ({ emailFieldModal: false }))
-    }
-
-    setEmailValue = (email) => {
-        this.setState(() => ({ email }))
     }
 
     componentDidMount() {
@@ -183,7 +178,6 @@ class CameraApp extends React.Component {
                 <EmailFieldModal
                     emailFieldModal={this.state.emailFieldModal}
                     closeEmailFieldModal={this.closeEmailFieldModal}
-                    setEmailValue={this.setEmailValue}
                     submitImage={this.submitImage}
                     emailLoading={this.state.emailLoading}
                 ></EmailFieldModal>
